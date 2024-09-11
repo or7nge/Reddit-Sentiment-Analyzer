@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff, #00ffff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 80%;
+    transform: skew(-5deg);
+}
+
+h1 {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 3em;
+    color: #ffff00;
+    text-shadow: 3px 3px 0 #ff00ff, 6px 6px 0 #00ffff;
+    margin-bottom: 30px;
+    animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+    2%, 64% {transform: translate(2px, 0) skew(0deg);}
+    4%, 60% {transform: translate(-2px, 0) skew(0deg);}
+    62% {transform: translate(0, 0) skew(5deg);}
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1em;
+    font-family: 'Press Start 2P', cursive;
+}
+
+input[type="submit"] {
+    background: #ff00ff;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Press Start 2P', cursive;
+}
+
+input[type="submit"]:hover {
+    background: #00ffff;
+    transform: scale(1.1) rotate(-5deg);
+}

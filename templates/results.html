@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAZY Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>CRAZY Analysis Results</h1>
+        <div class="chart-container">
+            <canvas id="sentimentChart"></canvas>
+        </div>
+        <div class="results-container">
+            {% for result in results %}
+                <div class="result">
+                    <h2>{{ result.title }}</h2>
+                    <p>{{ result.content }}</p>
+                    <p class="sentiment {{ result.sentiment }}">Sentiment: {{ result.sentiment }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="/" class="back-link">Back to CRAZY Home</a>
+    </div>
+    <button id="moveUpBtn" class="move-up-btn">Move Up!</button>
+    <script>
+        // JavaScript to handle the Move Up button
+        const moveUpBtn = document.getElementById('moveUpBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                moveUpBtn.classList.add('visible');
+            } else {
+                moveUpBtn.classList.remove('visible');
+            }
+        });
+
+        moveUpBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Create the sentiment pie chart
+        const results = {{ results|tojson|safe }};
+        const sentiments = results.map(result => result.sentiment);
+        const sentimentCounts = sentiments.reduce((acc, sentiment) => {
+            acc[sentiment] = (acc[sentiment] || 0) + 1;
+            return acc;
+        }, {});
+
+        const ctx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(sentimentCounts),
+                datasets: [{
+                    data: Object.values(sentimentCounts),
+                    backgroundColor: [
+                        '#00ff00',  // Positive
+                        '#ff0000',  // Negative
+                        '#ffff00'   // Neutral
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                family: "'Press Start 2P', cursive",
+                                size: 12
+                            },
+                            color: '#ffffff'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Sentiment Distribution',
+                        font: {
+                            family: "'Press Start 2P', cursive",
+                            size: 16
+                        },
+                        color: '#ffffff'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

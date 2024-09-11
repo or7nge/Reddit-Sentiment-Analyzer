@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRAZY Reddit Sentiment Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CRAZY Reddit Sentiment Analyzer</h1>
+        <form method="POST">
+            <label for="subreddit">Subreddit:</label>
+            <input type="text" id="subreddit" name="subreddit" required>
+            <label for="keyword">Keyword:</label>
+            <input type="text" id="keyword" name="keyword" required>
+            <input type="submit" value="ANALYZE!">
+        </form>
+    </div>
+</body>
+</html>
